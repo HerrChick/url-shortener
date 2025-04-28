@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Script to manage frontend container packages
+# Usage: ./frontend-container <command> [package-name]
+
+if [ "$#" -lt 1 ]; then
+    echo "Usage: ./frontend-container <command> [package-name]"
+    echo "Commands:"
+    echo "  install <package-name>    - Install a new package"
+    echo "  uninstall <package-name>  - Remove a package"
+    echo "  rebuild                   - Rebuild the frontend container"
+    exit 1
+fi
+
+COMMAND=$1
+PACKAGE=$2
+
+case $COMMAND in
+    "install")
+        if [ -z "$PACKAGE" ]; then
+            echo "Error: Package name is required for install command"
+            exit 1
+        fi
+        echo "Installing $PACKAGE in frontend container..."
+        docker-compose -f docker-compose-dev.yml exec frontend npm install $PACKAGE
+        ;;
+    "uninstall")
+        if [ -z "$PACKAGE" ]; then
+            echo "Error: Package name is required for uninstall command"
+            exit 1
+        fi
+        echo "Uninstalling $PACKAGE from frontend container..."
+        docker-compose -f docker-compose-dev.yml exec frontend npm uninstall $PACKAGE
+        ;;
+    "rebuild")
+        echo "Rebuilding frontend container..."
+        docker-compose -f docker-compose-dev.yml up --build -d frontend
+        ;;
+    *)
+        echo "Unknown command: $COMMAND"
+        echo "Available commands: install, uninstall, rebuild"
+        exit 1
+        ;;
+esac 

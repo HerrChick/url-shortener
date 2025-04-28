@@ -1,0 +1,37 @@
+# Node and Python environments (in case someone creates them at root)
+node_modules/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Docker
+*.pid
+docker-compose.override.yml
+
+# Editor directories and files
+.idea/
+.vscode/
+*.swp
+
+# Python bytecode at root (just in case)
+__pycache__/
+*.py[cod]
+
+# Environment variable files at root
+.env
+.env.*
+
+# Postgres data volume (if you ever mount it to a local folder)
+postgres_data/
+
+# Misc
+*.bak
