@@ -1,6 +1,5 @@
 from flask import Flask
 from db.connection import SessionLocal
-from db.models import *
 
 
 app = Flask(__name__)
